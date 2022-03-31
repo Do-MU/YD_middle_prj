@@ -21,9 +21,9 @@ public class OneAccount implements Command {
 		
 		HttpSession session = request.getSession();
 		String access_token = (String)session.getAttribute("access_token");
-		System.out.println(access_token);
+//		System.out.println(access_token);
 		String fintech_use_num = request.getParameter("finNum");
-		System.out.println(fintech_use_num);
+//		System.out.println(fintech_use_num);
 		
 		String result = OpenBank.checkBalance(fintech_use_num, access_token);
 		System.out.println(result);
