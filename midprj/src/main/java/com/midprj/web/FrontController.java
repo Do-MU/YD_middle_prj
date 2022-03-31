@@ -12,12 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.midprj.account.command.AccountInquiry;
 import com.midprj.account.command.AccountList;
+import com.midprj.accounts.command.AccountsView;
 import com.midprj.accounts.command.accountsList;
 import com.midprj.comm.Command;
 import com.midprj.comment.command.CommentDelete;
 import com.midprj.comment.command.CommentInsert;
 import com.midprj.comment.command.CommentSearch;
 import com.midprj.comment.command.CommentUpdate;
+import com.midprj.exchangerate.ExchangeRate;
 import com.midprj.home.command.HomeCommand;
 import com.midprj.member.command.AjaxMemberIdCheck;
 import com.midprj.member.command.AjaxMemberPwUpdate;
@@ -108,12 +110,15 @@ public class FrontController extends HttpServlet {
 		map.put("/accountInquiry.do", new AccountInquiry());					// 계좌
     
 		map.put("/mapAtm.do", new MapAtm()); 									// 주변 은행 페이지
+		map.put("/exchangeRate.do", new ExchangeRate()); 									// 주변 은행 페이지
+		
 		
 		map.put("/openBanking.do", new OpenBanking());
 		map.put("/bankOauth.do", new BankOauthCommand());
 		map.put("/callback.do", new CallbackCommand());
 		map.put("/accountsList.do", new accountsList());
 		map.put("/oneAccount.do", new OneAccount());
+		map.put("/accountsView.do", new AccountsView());
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
