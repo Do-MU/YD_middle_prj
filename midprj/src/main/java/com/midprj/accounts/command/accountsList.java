@@ -19,13 +19,14 @@ public class accountsList implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		AccountsService aDAO = new AccountsServiceImpl();
+		AccountsVO aVO = new AccountsVO();
 		
 		HttpSession session = request.getSession();
 		String access_token = (String) session.getAttribute("access_token");
 		String user_seq_no = (String) session.getAttribute("user_seq_no");
 		
 		String result = OpenBank.getAccountList(user_seq_no, access_token);
-		System.out.println(result);
+//		System.out.println(result);
 		
 		
 		Gson gson = new Gson();
@@ -34,14 +35,16 @@ public class accountsList implements Command {
 		
 		for(AccountsVO ac : alj.getRes_list()) {
 			System.out.println(ac);
-			if(aDAO.selectAccountInfo(ac)==0) {
+			if(aDAO.selectAccountInfo(ac)==0) {		// 불러온 목록 중 db에 저장되지 않은 계좌를 추가
 				System.out.println(aDAO.selectAccountInfo(ac));
+				ac.setUser_seq_no(user_seq_no);
 				aDAO.insertAccounts(ac);
 			}
-				
-			
 		}
-		List<AccountsVO> list = alj.getRes_list();
+		aVO.setUser_seq_no(user_seq_no);
+		System.out.println(aVO.getUser_seq_no());
+		List<AccountsVO> list = aDAO.selectAccounts(aVO);
+		System.out.println(list);
 		request.setAttribute("list", list);
 		
 		/*
