@@ -1,4 +1,4 @@
-package com.midprj.openbank.service;
+package com.midprj.openbanking.service;
 
 public interface OpenBankingMapper {
 	OpenBankingVO selectMember(OpenBankingVO vo);	//한명분 데이터 또는 로그인 처리

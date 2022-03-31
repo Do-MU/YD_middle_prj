@@ -1,4 +1,4 @@
-package com.midprj.openbank.service;
+package com.midprj.openbanking.service;
 
 import lombok.Getter;
 import lombok.Setter;

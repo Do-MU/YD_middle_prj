@@ -1,12 +1,11 @@
-package com.midprj.openbank.serviceImpl;
+package com.midprj.openbanking.serviceImpl;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.midprj.comm.DataSource;
-
-import com.midprj.openbank.service.OpenBankingMapper;
-import com.midprj.openbank.service.OpenBankingService;
-import com.midprj.openbank.service.OpenBankingVO;
+import com.midprj.openbanking.service.OpenBankingMapper;
+import com.midprj.openbanking.service.OpenBankingService;
+import com.midprj.openbanking.service.OpenBankingVO;
 
 public class OpenBankingServiceImpl implements OpenBankingService {
 	private SqlSession sqlSession = DataSource.getInstance().openSession(true);
