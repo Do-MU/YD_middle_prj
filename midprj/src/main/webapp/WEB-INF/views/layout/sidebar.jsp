@@ -208,6 +208,11 @@ a {
                         <ion-icon name="help-circle-outline" class="nav__icon"></ion-icon>
                         <span class="nav_name">QnA</span>
                     </a>
+                    
+                    <a href="exchangeRate.do" class="nav__link">
+                        <ion-icon name="swap-horizontal-outline" class="nav__icon"></ion-icon>
+                        <span class="nav_name">Exchange</span>
+                    </a>
 
 					<a href="mapAtm.do" class="nav__link">
                         <ion-icon name="locate-outline" class="nav__icon"></ion-icon>
