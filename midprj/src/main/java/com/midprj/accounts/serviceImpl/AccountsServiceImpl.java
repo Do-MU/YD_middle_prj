@@ -14,9 +14,9 @@ public class AccountsServiceImpl implements AccountsService {
 	private AccountsMapper map = sqlSession.getMapper(AccountsMapper.class);
 
 	@Override
-	public List<AccountsVO> selectAccounts() {
+	public List<AccountsVO> selectAccounts(AccountsVO vo) {
 		// TODO Auto-generated method stub
-		return map.selectAccounts();
+		return map.selectAccounts(vo);
 	}
 
 	@Override
