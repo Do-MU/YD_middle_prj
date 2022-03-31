@@ -82,7 +82,7 @@ th {
 	<div>
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="l">
-				<div id="account_${l.fintech_use_num}" class="acnt" onclick="location.href='accountContents.do?fin_num=${l.fintech_use_num}")>
+				<div id="account_${l.fintech_use_num}" class="acnt" onclick="location.href='oneAccount.do?fin_num=${l.fintech_use_num}'")>
 					<h2>${l.bank_name }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${l.account_num_masked }</h2>
 					<h3>${l.account_holder_name }</h3>
 				</div>

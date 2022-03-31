@@ -1,5 +1,7 @@
 package com.midprj.oneaccount.command;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -7,48 +9,38 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.midprj.comm.Command;
 import com.midprj.comm.OpenBank;
-import com.midprj.oneaccount.service.OneAccountJson;
-import com.midprj.oneaccount.service.OneAccountService;
-import com.midprj.oneaccount.service.OneAccountVO;
-import com.midprj.oneaccount.serviceImpl.OneAccountServiceImpl;
+import com.midprj.transaction.service.TransactionListJson;
+import com.midprj.transaction.service.TransactionService;
+import com.midprj.transaction.service.TransactionVO;
+import com.midprj.transaction.serviceImpl.TransactionServiceImpl;
+
 
 public class OneAccount implements Command {
+	TransactionService tDAO = new TransactionServiceImpl();
+	TransactionVO tVO = new TransactionVO();
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-
-		
+		String fin_num = request.getParameter("fin_num");
 		HttpSession session = request.getSession();
-		String access_token = (String)session.getAttribute("access_token");
-//		System.out.println(access_token);
-		String fintech_use_num = request.getParameter("finNum");
-//		System.out.println(fintech_use_num);
 		
-		String result = OpenBank.checkBalance(fintech_use_num, access_token);
-		System.out.println(result);
+		
+		String access_token = (String) session.getAttribute("access_token");
+		String tranList = OpenBank.transactionList(fin_num, access_token);
+		
+		System.out.println(tranList);
+		
 		Gson gson = new Gson();
-		OneAccountJson oaj = gson.fromJson(result, OneAccountJson.class);
+		TransactionListJson tlj = gson.fromJson(tranList,TransactionListJson.class);
 		
-		OneAccountVO vo = new OneAccountVO();
-
+		for(TransactionVO ta : tlj.getRes_list()) {
+			System.out.println(ta);
+			tDAO.insertTransactions(ta);
+		}
 		
-		vo.setBank_name(oaj.getBank_name());
-		vo.setFintech_use_num(oaj.getFintech_use_num());
-		vo.setBalance_amt(oaj.getBalance_amt());
-		vo.setProduct_name(oaj.getProduct_name());
-		vo.setAccount_issue_date(oaj.getAccount_issue_date());
-		vo.setMaturity_date(oaj.getMaturity_date());
-		
-		System.out.println(vo);
-		
-
-		request.setAttribute("bank_name", vo.getBank_name());
-		request.setAttribute("finNum", vo.getFintech_use_num());
-		request.setAttribute("balance_amt", vo.getBalance_amt());
-		request.setAttribute("product_name", vo.getProduct_name());
-		request.setAttribute("account_issue_date", vo.getAccount_issue_date());
-		request.setAttribute("maturity_date", vo.getMaturity_date());
+		List<TransactionVO> list = tDAO.selectTransactions(tVO);
+		request.setAttribute("list", list);
 		
 		
 		return "oneAccount/showOneAccount";
