@@ -80,24 +80,19 @@ th {
 
 	<div>
 		<table id="contents">
-
-
-
-			<tbody id="noticeBody">
-				<c:if test="${not empty list }">
-					<c:forEach items="${list }" var="n">
-						<tr class="notices">
-							<td align="center">${n.tran_date }</td>
-							<td align="center">${n.inout_type }</td>
-							<td align="center">${n.tran_type }</td>
-							<td align="center">${n.print_content }</td>
-							<td align="center">${n.tran_amt }</td>
-							<td align="center">${n.after_balance_amt }</td>
-							<td align="center">${n.branch_name }</td>
-						</tr>
-					</c:forEach>
-				</c:if>
-			</tbody>
+			<c:if test="${not empty list }">
+				<c:forEach items="${list }" var="l">
+					<tr class="notices">
+						<td align="center">${l.tran_date }</td>
+						<td align="center">${l.inout_type }</td>
+						<td align="center">${l.tran_type }</td>
+						<td align="center">${l.print_content }</td>
+						<td align="center">${l.tran_amt }</td>
+						<td align="center">${l.after_balance_amt }</td>
+						<td align="center">${l.branch_name }</td>
+					</tr>
+				</c:forEach>
+			</c:if>
 		</table>
 	</div>
 </div>

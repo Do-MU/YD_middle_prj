@@ -121,19 +121,8 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav ml-auto">
 								<li class="nav-item"><a class="nav-link" href="openBanking.do">오픈뱅킹</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="accountList.do">계좌조회</a></li>
-								<li class="nav-item"><a class="nav-link" href="#">이체하기</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="noticeList.do">공지사항</a></li>
+								<li class="nav-item"><a class="nav-link" href="noticeList.do">공지사항</a></li>
 								<li class="nav-item"><a class="nav-link" href="qnaList.do">QnA</a></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false"> Pages </a>
-									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-										<a class="dropdown-item" href="404.html">404 Page</a>
-									</div></li>
 							</ul>
 						</div>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
