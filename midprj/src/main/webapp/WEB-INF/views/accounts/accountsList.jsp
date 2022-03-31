@@ -10,6 +10,12 @@
 #container {
 	padding-bottom: 200px;
 }
+#page_header{
+	margin-bottom: 100px;
+}
+.col-md-12> h2{
+	font-weight: lighter;
+}
 table {
 	margin-top: 50px;
 	width: 60%;
@@ -41,6 +47,9 @@ th {
 	border-radius: 10px;
 	background-color: blue;
 }
+.acnt:hover{
+	cursor:pointer;
+}
 .acnt:nth-child(2n){
 	background-color: skyblue;
 }
@@ -53,12 +62,6 @@ th {
 	color: white;
 	padding: 50px 30px 0 0;
 	text-align: right;
-}
-	#page_header{
-	margin-bottom: 100px;
-}
-.col-md-12> h2{
-	font-weight: lighter;
 }
 </style>
 
@@ -82,7 +85,7 @@ th {
 	<div>
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="l">
-				<div id="account_${l.fintech_use_num}" class="acnt" onclick="location.href='accountContents.do?fin_num=${l.fintech_use_num}")>
+				<div id="account_${l.fintech_use_num}" class="acnt" onclick="location.href='accountsView.do?fin_num=${l.fintech_use_num}'">
 					<h2>${l.bank_name }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${l.account_num_masked }</h2>
 					<h3>${l.account_holder_name }</h3>
 				</div>
@@ -91,4 +94,5 @@ th {
 	</div>
 </div>
 <script>
+	
 </script>

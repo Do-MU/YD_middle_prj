@@ -9,6 +9,7 @@ public interface AccountsService {
 	AccountsVO selectOneAccount(String fintech_use_num);	//계좌단건조회
 	int selectAccountInfo(AccountsVO vo);
 	int insertAccounts(AccountsVO vo);	//등록
+	int updateAccounts(AccountsVO vo);
 
 	
 }

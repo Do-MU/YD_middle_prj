@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.midprj.account.command.AccountInquiry;
 import com.midprj.account.command.AccountList;
+import com.midprj.accounts.command.AccountsView;
 import com.midprj.accounts.command.accountsList;
 import com.midprj.comm.Command;
 import com.midprj.comment.command.CommentDelete;
@@ -114,6 +115,7 @@ public class FrontController extends HttpServlet {
 		map.put("/callback.do", new CallbackCommand());
 		map.put("/accountsList.do", new accountsList());
 		map.put("/oneAccount.do", new OneAccount());
+		map.put("/accountsView.do", new AccountsView());
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)

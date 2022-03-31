@@ -34,17 +34,32 @@ public class accountsList implements Command {
 		AccountsListJson alj = gson.fromJson(result, AccountsListJson.class);
 		//System.out.println(alj.getRes_list());
 		
+		// 프로그램이 실행될때마다 테스트베드에서 목록을 가져와서 새로 추가된 계좌목록이 있는지 확인
 		for(AccountsVO ac : alj.getRes_list()) {
 //			System.out.println(ac);
-			if(aDAO.selectAccountInfo(ac)==0) {		// 불러온 목록 중 db에 저장되지 않은 계좌를 추가
+			// 불러온 계좌목록 중 DB에 저장되지 않은 계좌목록이 있다면 추가
+			if(aDAO.selectAccountInfo(ac)==0) {
 //				System.out.println(aDAO.selectAccountInfo(ac));
 				String result2 = OpenBank.checkBalance(ac.getFintech_use_num(), access_token);
-				System.out.println(result2);
+//				System.out.println(result2);
 				OneAccountJson oaj = gson.fromJson(result2, OneAccountJson.class);
 				ac.setBalance_amt(oaj.getBalance_amt());
 				ac.setProduct_name(oaj.getProduct_name());
 				ac.setUser_seq_no(user_seq_no);
 				aDAO.insertAccounts(ac);
+			}
+			
+//			System.out.println(ac.getFintech_use_num());
+			
+			// 계좌조회 데이터의 금액과 DB상의 계좌조회 데이터의 금액과 다르다면 목록에 대해 테스트베드 상에서 계좌 조회 데이터를 추가했다면
+			// 결과를 불러와서 DB에 저장
+			if(aDAO.selectOneAccount(ac.getFintech_use_num()).getBalance_amt() != ac.getAccount_balance()) {
+				String result2 = OpenBank.checkBalance(ac.getFintech_use_num(), access_token);
+//				System.out.println(result2);
+				OneAccountJson oaj = gson.fromJson(result2, OneAccountJson.class);
+				ac.setBalance_amt(oaj.getBalance_amt());
+				ac.setProduct_name(oaj.getProduct_name());
+				aDAO.updateAccounts(ac);
 			}
 		}
 		aVO.setUser_seq_no(user_seq_no);
