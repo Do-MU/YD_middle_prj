@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midprj.notice.service.NoticeMapper">
+	<resultMap type = "com.midprj.notice.service.NoticeVO" id="noticeMap">
+		<id property="noticeId" column="notice_id"></id>
+		<result property="noticeTitle" column="notice_title"></result>
+		<result property="noticeDate" column="notice_date"></result>
+		<result property="noticeContents" column="notice_contents"></result>
+		<result property="noticeHit" column="notice_hit"></result>
+		<result property="commentQuery" column="comment_query"></result>
+	</resultMap>
+	
+	<!-- 공지사항 리스트 출력 -->
+	<select id="noticeSelectList" resultMap = "noticeMap">
+		SELECT *
+		FROM NOTICE
+		ORDER BY NOTICE_ID DESC
+	</select>
+	
+	<!-- 공지사항 내용 출력 -->
+	<select id="noticeSelect" parameterType="com.midprj.notice.service.NoticeVO"  resultMap = "noticeMap">
+		SELECT *
+		FROM NOTICE
+		WHERE NOTICE_ID = (#{noticeId}) 
+	</select>
+	
+	<!-- 재정렬 출력 -->
+	<select id ="noticeSortList" parameterType="String" resultMap="noticeMap">
+		SELECT *
+		FROM NOTICE
+		ORDER BY NOTICE_ID
+		<if test='key == "A"'>ASC</if>
+		<if test='key == "D"'>DESC</if>
+	</select>
+	
+	<!-- 검색된 공지사항 리스트 출력 -->
+	<select id = "noticeSelectSearchList" resultMap="noticeMap">
+		SELECT *
+		FROM NOTICE
+		WHERE
+		<if test = "key == 1">1 = 1</if>
+		<if test = "key == 2">NOTICE_TITLE LIKE '%'||#{val}||'%'</if>
+		<if test = "key == 3">NOTICE_CONTENTS LIKE '%'||#{val}||'%'</if>
+		ORDER BY NOTICE_ID DESC
+	</select>
+	
+	<!-- 공지사항 등록 -->
+	<insert id="noticeInsert" parameterType="com.midprj.notice.service.NoticeVO">
+	<selectKey keyProperty="noticeId" resultType="int" order="BEFORE">
+			SELECT CASE WHEN MAX(NOTICE_ID) IS NULL THEN 1
+						ELSE MAX(NOTICE_ID)+ 1 END AS ID
+			FROM NOTICE
+		</selectKey>
+		INSERT INTO NOTICE
+		VALUES (#{noticeId},#{noticeTitle},SYSDATE,#{noticeContents},0)
+	</insert>
+	
+	<!-- 공지사항 수정 -->
+	<update id="noticeUpdate" parameterType="com.midprj.notice.service.NoticeVO">
+		UPDATE NOTICE 
+		SET NOTICE_TITLE = #{noticeTitle} , NOTICE_CONTENTS = #{noticeContents}, NOTICE_DATE = SYSDATE
+		WHERE NOTICE_ID = #{noticeId}
+	</update>
+	
+	<!-- 조회수 처리 -->
+	<update id="noticeUpdateHit" parameterType="int">
+		UPDATE NOTICE
+		SET NOTICE_HIT = NOTICE_HIT + 1 WHERE NOTICE_ID = #{noticeId}
+	</update>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="noticeDelete" parameterType="int">
+		DELETE FROM NOTICE
+		WHERE NOTICE_ID = #{noticeId}
+	</delete>
+	
+	<!--댓글수 처리  -->
+	<update id = "commentQuery" parameterType="int">
+		UPDATE NOTICE
+		SET COMMENT_QUERY = (SELECT COUNT(COMMENT_ID)
+                   			  FROM COMMENTS
+                  			   WHERE NOTICE_ID = ${noticeId}) 
+		WHERE NOTICE_ID = ${noticeId}
+	</update>
+	
+	<select id = "getTotal" resultType="Integer">
+		SELECT COUNT(*)
+		FROM NOTICE
+	</select>
+	
+	<select id ="getList" parameterType="String" resultType = "Integer" resultMap="noticeMap">
+		SELECT * 
+		FROM (SELECT ROWNUM RN, A.*
+		FROM (SELECT * FROM NOTICE ORDER BY NOTICE_ID DESC) A)
+		<![CDATA[ WHERE RN > ((${pageNum }-1) * ${amount }) AND RN <= ${pageNum } * ${amount } ]]>
+		ORDER BY NOTICE_ID DESC
+	</select>
+</mapper>

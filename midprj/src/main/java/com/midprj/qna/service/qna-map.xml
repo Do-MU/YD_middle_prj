@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midprj.qna.service.QnaMapper">
+	<resultMap type="com.midprj.qna.service.QnaVO" id="qnaMap">
+		<id property="qnaId" column="qna_id"/>
+		<result property = "qnaTitle" column="qna_title"/>
+		<result property = "qnaDate" column="qna_date"/>
+		<result property = "qnaContents" column="qna_contents"/>
+		<result property = "memberId" column="member_id"/>
+		<result property = "qnaIsAnswered" column="qna_is_answered"/>
+		<result property = "qnaAnswerContents" column="qna_answer_contents"/>
+		<result property = "qnaAnswerDate" column="qna_answer_date"/>
+	</resultMap>
+	
+	
+	<select id = "qnaSelectList" resultMap="qnaMap">
+		SELECT *
+		FROM QNA
+		<if test='memberId != "admin"'>where member_id = (#{memberId})</if>
+		ORDER BY QNA_ID DESC
+	</select>
+	
+	<select id="qnaSelect" parameterType="com.midprj.qna.service.QnaVO" resultMap = "qnaMap">
+		SELECT *
+		FROM QNA
+		WHERE QNA_ID = (#{qnaId})
+	</select>
+	
+	<select id = "getTotal" resultType="Integer">
+		SELECT COUNT(*)
+		FROM QNA
+	</select>
+	<insert id ="qnaInsert" parameterType="com.midprj.qna.service.QnaVO">
+		<selectKey keyProperty="qnaId" resultType="int" order="BEFORE">
+			SELECT CASE WHEN MAX(qna_id) IS NULL THEN 1 ELSE MAX(qna_id) + 1 END AS ID FROM QNA
+		</selectKey>
+		INSERT INTO QNA
+		VALUES(#{qnaId},#{qnaTitle},SYSDATE,#{qnaContents},#{memberId},#{qnaIsAnswered},#{qnaAnswerContents},#{qnaAnswerDate})
+	</insert>
+	
+	<update id ="qnaUpdate" parameterType= "com.midprj.qna.service.QnaVO">
+		UPDATE QNA 
+		SET QNA_IS_ANSWERED = #{qnaIsAnswered} , QNA_ANSWER_CONTENTS = #{qnaAnswerContents}, QNA_ANSWER_DATE = SYSDATE
+		WHERE QNA_ID = #{qnaId}
+	</update>
+	
+	<select id ="getList" parameterType="String" resultType = "Integer" resultMap="qnaMap">
+		SELECT * 
+		FROM (SELECT ROWNUM RN, A.*
+		FROM (SELECT * FROM QNA ORDER BY QNA_ID DESC) A)
+		<![CDATA[ WHERE RN > ((${pageNum }-1) * ${amount }) AND RN <= ${pageNum } * ${amount } ]]>
+		 <if test='memberId != "admin"'> AND MEMBER_ID = #{memberId } </if>
+		ORDER BY QNA_ID DESC
+<!-- <![CDATA[WHERE RN > ((${pageNum }-1) * ${amount}) AND RN <= (${pageNum} * ${amount})]]> -->
+	</select>
+</mapper>

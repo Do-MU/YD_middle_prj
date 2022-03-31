@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midprj.comment.service.CommentMapper">
+	<resultMap type = "com.midprj.comment.service.CommentVO" id="commentMap">
+		<id property="commentId" column="comment_id"></id>
+		<result property="commentContents" column="comment_contents"></result>
+		<result property="memberId" column="member_id"></result>
+		<result property="noticeId" column="notice_id"></result>
+		<result property="commentDate" column="comment_date"></result>
+	</resultMap>
+	<select id="commentSelectList" parameterType = "int" resultMap="commentMap">
+		SELECT *
+		FROM COMMENTS
+		WHERE NOTICE_ID = #{noticeId}
+		ORDER BY COMMENT_ID
+	</select>
+	<insert id="commentInsert"  parameterType="com.midprj.comment.service.CommentVO" >
+		<selectKey keyProperty="commentId" resultType="int" order="BEFORE">
+			select case when max(comment_id) is null then 1 else max(comment_id)+ 1 end as id from comments
+		</selectKey>
+		INSERT INTO COMMENTS
+		VALUES (#{commentId},#{commentContents},#{memberId},#{noticeId},#{commentDate})
+	</insert>
+	<update id = "commentUpdate"  parameterType="com.midprj.comment.service.CommentVO">
+		UPDATE COMMENTS 
+		SET COMMENT_CONTENTS = #{commentContents}
+		WHERE COMMENT_ID = #{commentId}
+	</update>
+	<delete id = "commentDelete"  parameterType="com.midprj.comment.service.CommentVO">
+		DELETE FROM COMMENTS
+		WHERE COMMENT_ID = #{commentId}
+	</delete>
+	
+</mapper>

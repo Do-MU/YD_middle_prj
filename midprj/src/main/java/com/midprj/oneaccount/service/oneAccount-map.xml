@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midprj.oneaccount.service.OneAccountMapper">
+	<resultMap type="com.midprj.oneaccount.service.OneAccountVO" id="oneAccountMap">
+		<id property="fintech_use_num" column="fintech_use_num"></id>
+		<result property="bank_name" column="bank_name"></result>
+		<result property="balance_amt" column="balance_amt"></result>
+		<result property="product_name" column="product_name"></result>
+		<result property="account_issue_date" column="account_issue_date"></result>
+		<result property="maturity_date" column="maturity_date"></result>
+	</resultMap>
+
+	<insert id="insertOneAccount" parameterType="com.midprj.oneaccount.service.OneAccountVO">
+	INSERT INTO ONEACCOUNT
+	VALUES (#{bank_name},#{fintech_use_num},#{balance_amt},#{product_name},#{account_issue_date},#{maturity_date})
+	</insert>
+
+</mapper>

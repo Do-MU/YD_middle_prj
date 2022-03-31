@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="/config/db.properties"/>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"></setting>
+	</settings>  
+	  <environments default="development">
+	    <environment id="development">
+	      <transactionManager type="JDBC"/>
+	      <dataSource type="POOLED">
+	        <property name="driver" value="${driver}"/>
+	        <property name="url" value="${url}"/>
+	        <property name="username" value="${username}"/>
+	        <property name="password" value="${password}"/>
+	      </dataSource>
+	    </environment>
+	  </environments>
+  <mappers>
+    <mapper resource="com/midprj/member/service/member-map.xml"/>
+    <mapper resource="com/midprj/notice/service/notice-map.xml"/>
+    <mapper resource="com/midprj/comment/service/comment-map.xml"/>
+    <mapper resource="com/midprj/qna/service/qna-map.xml"/>
+    <mapper resource="com/midprj/account/service/account-map.xml"/>
+    <mapper resource="com/midprj/openbank/service/openbanking-map.xml"/>
+    <mapper resource="com/midprj/accounts/service/accounts-map.xml"/>
+    <mapper resource="com/midprj/oneaccount/service/oneAccount-map.xml"/>
+     
+  </mappers>
+</configuration>

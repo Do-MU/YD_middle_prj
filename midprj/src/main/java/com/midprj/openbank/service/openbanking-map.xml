@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midprj.openbank.service.OpenBankingMapper">
+	<resultMap type="com.midprj.openbank.service.OpenBankingVO" id="openBankingMap">
+		<id property="code" column="code"></id>
+	</resultMap>
+	
+	
+
+	<insert id="insertMember"
+		parameterType="com.midprj.openbank.service.OpenBankingVO">
+		INSERT INTO OPENBANKING
+		VALUES(#{code},#{access_token},#{refresh_token},#{user_seq_no},#{member_id})
+	</insert>
+
+</mapper>
