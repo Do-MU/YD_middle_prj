@@ -15,6 +15,6 @@ public class MemberVO {
 	//@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private String memberBirth;
 	private String memberAddress;
-	
+	private String userSeqNo;
 	
 }
