@@ -11,23 +11,34 @@
 		alert('로그인이 필요합니다.');
 		window.location = "memberLoginForm.do";
 	}
+	
+	if('${access_token}' != ''){
+		window.location = "accountsList.do";
+	}
 </script>
+<style>
+#container {
+	margin: 100px auto;
+}
+.btn{
+	padding: 10px;
+	margin: 50px;
+}
+h3{
+	text-align: center;
+}
+</style>
 </head>
 <body>
-	<c:if test="${empty access_token}">
-		<div>
-			<button type="button" onclick="location.href ='bankOauth.do'">사용자
-				인증 및 토큰 발급</button>
-
-		</div>
-	</c:if>
-
-	<c:if test="${not empty access_token}">
-		<div>
-			<h1>사용자님의 access_token은 ${access_token }입니다.</h1>
-			<h3>${message }</h3>
-			<button type="button" onclick="location.href ='accountsList.do'">등록계좌조회</button>
-		</div>
-	</c:if>
+	<div id="container" align="center">
+		<c:if test="${empty access_token}">
+			<div>
+				<div>
+					<h3>등록된 계좌가 없습니다...<br>계좌등록을 위해 아래 버튼을 눌러 인증해주시기 바랍니다.</h3>
+				</div>
+				<button type="button" class="btn btn-primary" onclick="location.href ='bankOauth.do'">인증하기</button>
+			</div>
+		</c:if>
+	</div>
 </body>
 </html>

@@ -13,25 +13,19 @@ import com.midprj.accounts.service.AccountsVO;
 import com.midprj.accounts.serviceImpl.AccountsServiceImpl;
 import com.midprj.comm.Command;
 import com.midprj.comm.OpenBank;
-import com.midprj.oneaccount.service.OneAccountJson;
-import com.midprj.oneaccount.service.OneAccountVO;
 
 public class accountsList implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-		AccountsService accountDao = new AccountsServiceImpl();
+		AccountsService aDAO = new AccountsServiceImpl();
 		
 		HttpSession session = request.getSession();
 		String access_token = (String) session.getAttribute("access_token");
 		String user_seq_no = (String) session.getAttribute("user_seq_no");
-		System.out.println(access_token+ "  "+user_seq_no);
-		
 		
 		String result = OpenBank.getAccountList(user_seq_no, access_token);
 		System.out.println(result);
-		
-		
 		
 		
 		Gson gson = new Gson();
@@ -40,24 +34,14 @@ public class accountsList implements Command {
 		
 		for(AccountsVO ac : alj.getRes_list()) {
 			System.out.println(ac);
-			if(accountDao.selectAccountInfo(ac)==0) {
-				
-				System.out.println(accountDao.selectAccountInfo(ac));
-				String result2 = OpenBank.checkBalance(ac.getFintech_use_num(), access_token);
-				OneAccountJson oaj = gson.fromJson(result2, OneAccountJson.class);
-				OneAccountVO vo = new OneAccountVO();
-				vo.setBalance_amt(oaj.getBalance_amt());
-				
-				
-
-				
-				
-				accountDao.insertAccounts(ac);
+			if(aDAO.selectAccountInfo(ac)==0) {
+				System.out.println(aDAO.selectAccountInfo(ac));
+				aDAO.insertAccounts(ac);
 			}
 				
 			
 		}
-		List<AccountsVO> list = accountDao.selectAccounts();
+		List<AccountsVO> list = alj.getRes_list();
 		request.setAttribute("list", list);
 		
 		/*
