@@ -14,50 +14,58 @@ import com.midprj.accounts.serviceImpl.AccountsServiceImpl;
 import com.midprj.comm.Command;
 import com.midprj.comm.OpenBank;
 import com.midprj.oneaccount.service.OneAccountJson;
-import com.midprj.oneaccount.service.OneAccountVO;
 
 public class accountsList implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-		AccountsService accountDao = new AccountsServiceImpl();
+		AccountsService aDAO = new AccountsServiceImpl();
+		AccountsVO aVO = new AccountsVO();
 		
 		HttpSession session = request.getSession();
 		String access_token = (String) session.getAttribute("access_token");
 		String user_seq_no = (String) session.getAttribute("user_seq_no");
-		System.out.println(access_token+ "  "+user_seq_no);
-		
 		
 		String result = OpenBank.getAccountList(user_seq_no, access_token);
-		System.out.println(result);
-		
-		
+//		System.out.println(result);
 		
 		
 		Gson gson = new Gson();
 		AccountsListJson alj = gson.fromJson(result, AccountsListJson.class);
 		//System.out.println(alj.getRes_list());
 		
+		// 프로그램이 실행될때마다 테스트베드에서 목록을 가져와서 새로 추가된 계좌목록이 있는지 확인
 		for(AccountsVO ac : alj.getRes_list()) {
-			System.out.println(ac);
-			if(accountDao.selectAccountInfo(ac)==0) {
-				
-				System.out.println(accountDao.selectAccountInfo(ac));
+//			System.out.println(ac);
+			// 불러온 계좌목록 중 DB에 저장되지 않은 계좌목록이 있다면 추가
+			if(aDAO.selectAccountInfo(ac)==0) {
+//				System.out.println(aDAO.selectAccountInfo(ac));
 				String result2 = OpenBank.checkBalance(ac.getFintech_use_num(), access_token);
+//				System.out.println(result2);
 				OneAccountJson oaj = gson.fromJson(result2, OneAccountJson.class);
-				OneAccountVO vo = new OneAccountVO();
-				vo.setBalance_amt(oaj.getBalance_amt());
-				
-				
-
-				
-				
-				accountDao.insertAccounts(ac);
+				ac.setBalance_amt(oaj.getBalance_amt());
+				ac.setProduct_name(oaj.getProduct_name());
+				ac.setUser_seq_no(user_seq_no);
+				aDAO.insertAccounts(ac);
 			}
-				
 			
+//			System.out.println(ac.getFintech_use_num());
+			
+			// 계좌조회 데이터의 금액과 DB상의 계좌조회 데이터의 금액과 다르다면 목록에 대해 테스트베드 상에서 계좌 조회 데이터를 추가했다면
+			// 결과를 불러와서 DB에 저장
+			if(aDAO.selectOneAccount(ac.getFintech_use_num()).getBalance_amt() != ac.getAccount_balance()) {
+				String result2 = OpenBank.checkBalance(ac.getFintech_use_num(), access_token);
+//				System.out.println(result2);
+				OneAccountJson oaj = gson.fromJson(result2, OneAccountJson.class);
+				ac.setBalance_amt(oaj.getBalance_amt());
+				ac.setProduct_name(oaj.getProduct_name());
+				aDAO.updateAccounts(ac);
+			}
 		}
-		List<AccountsVO> list = accountDao.selectAccounts();
+		aVO.setUser_seq_no(user_seq_no);
+//		System.out.println(aVO.getUser_seq_no());
+		List<AccountsVO> list = aDAO.selectAccounts(aVO);
+//		System.out.println(list);
 		request.setAttribute("list", list);
 		
 		/*

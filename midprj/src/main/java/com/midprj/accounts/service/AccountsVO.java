@@ -16,5 +16,7 @@ public class AccountsVO {
 	private String account_holder_name;
 	private String account_state;
 	private String account_balance;
-
+	private String user_seq_no;
+	private String balance_amt;
+	private String product_name;
 }

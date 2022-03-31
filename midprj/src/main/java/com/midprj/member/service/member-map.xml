@@ -1,64 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.midprj.member.service.MemberMapper">
-	 <resultMap type="com.midprj.member.service.MemberVO" id="memberMap">
-		<id property="memberId" column="member_id"/>
-		<result property="memberPw" column="member_pw"/>
-		<result property="memberName" column="member_name"/>
-		<result property="memberEmail" column="member_email"/>
-		<result property="memberTel" column="member_tel"/>
-		<result property="memberBirth" column="member_birth"/>
-		<result property="memberAddress" column="member_address"/>
-	</resultMap> 
+    <resultMap type="com.midprj.member.service.MemberVO" id="memberMap">
+      <id property="memberId" column="member_id"/>
+      <result property="memberPw" column="member_pw"/>
+      <result property="memberName" column="member_name"/>
+      <result property="memberEmail" column="member_email"/>
+      <result property="memberTel" column="member_tel"/>
+      <result property="memberBirth" column="member_birth"/>
+      <result property="memberAddress" column="member_address"/>
+      <result property="userSeqNo" column="user_seq_no"/>
+   </resultMap> 
 
-	<select id="selectMember"
-		parameterType="com.midprj.member.service.MemberVO"
-		resultMap="memberMap">
-		SELECT * FROM MEMBERS WHERE member_id = #{memberId}
-		<if test="memberPw != null">AND member_pw = #{memberPw}</if>
-	</select>
-	
-	<select id="selectMemberId"
-		parameterType="com.midprj.member.service.MemberVO"
-		resultMap="memberMap">
-		SELECT * FROM MEMBERS WHERE member_email = #{memberEmail}
-		
-	</select>
-	
+   <select id="selectMember"
+      parameterType="com.midprj.member.service.MemberVO"
+      resultMap="memberMap">
+      SELECT * FROM MEMBERS WHERE member_id = #{memberId}
+      <if test="memberPw != null">AND member_pw = #{memberPw}</if>
+   </select>
+   
+   <select id="selectMemberId"
+      parameterType="com.midprj.member.service.MemberVO"
+      resultMap="memberMap">
+      SELECT * FROM MEMBERS WHERE member_email = #{memberEmail}
+      
+   </select>
+   
 
-	<insert id="insertMember"
-		parameterType="com.midprj.member.service.MemberVO">
-		INSERT INTO MEMBERS
-		VALUES(#{memberId},#{memberPw},#{memberName},#{memberEmail},#{memberTel},#{memberBirth},#{memberAddress})
-	</insert>
-	
-	<update id="updateMember"
-		parameterType="com.midprj.member.service.MemberVO" >
-		UPDATE MEMBERS
-		<trim prefix="SET" suffixOverrides=",">
-			<if test="memberPw != null"> MEMBER_PW = #{memberPw},</if>
-			<if test="memberName != null"> MEMBER_NAME = #{memberName},</if>
-			<if test="memberEmail != null"> MEMBER_EMAIL = #{memberEmail},</if>
-			<if test="memberTel != null"> MEMBER_TEL = #{memberTel},</if>
-			<if test="memberBirth != null"> MEMBER_BIRTH = #{memberBirth},</if>
-			<if test="memberAddress != null"> MEMBER_ADDRESS = #{memberAddress},</if>
-		</trim>
-		where MEMBER_Id= #{memberId}
-	</update>
-	
-	<delete id="deleteMember"
-		parameterType="com.midprj.member.service.MemberVO">
-		DELETE FROM MEMBERS WHERE MEMBER_ID = #{memberId}
-	</delete>
+   <insert id="insertMember"
+      parameterType="com.midprj.member.service.MemberVO">
+      INSERT INTO MEMBERS
+      VALUES(#{memberId},#{memberPw},#{memberName},#{memberEmail},#{memberTel},#{memberBirth},#{memberAddress},0)
+   </insert>
+   
+   <update id="updateMember"
+      parameterType="com.midprj.member.service.MemberVO" >
+      UPDATE MEMBERS
+      <trim prefix="SET" suffixOverrides=",">
+         <if test="memberPw != null"> MEMBER_PW = #{memberPw},</if>
+         <if test="memberName != null"> MEMBER_NAME = #{memberName},</if>
+         <if test="memberEmail != null"> MEMBER_EMAIL = #{memberEmail},</if>
+         <if test="memberTel != null"> MEMBER_TEL = #{memberTel},</if>
+         <if test="memberBirth != null"> MEMBER_BIRTH = #{memberBirth},</if>
+         <if test="memberAddress != null"> MEMBER_ADDRESS = #{memberAddress},</if>
+         <if test="userSeqNo != null"> USER_SEQ_NO= #{userSeqNo},</if>
+      </trim>
+      where MEMBER_Id= #{memberId}
+   </update>
+   
+   <delete id="deleteMember"
+      parameterType="com.midprj.member.service.MemberVO">
+      DELETE FROM MEMBERS WHERE MEMBER_ID = #{memberId}
+   </delete>
 
-	<select id="isIdCheck" parameterType="String"
-		resultType="boolean">
-		SELECT CASE WHEN COUNT(MEMBER_ID) = 1 THEN 0 ELSE 1 END AS MEMBER_ID
-		FROM MEMBERS WHERE MEMBER_ID = #{str}
-	</select>
+   <select id="isIdCheck" parameterType="String"
+      resultType="boolean">
+      SELECT CASE WHEN COUNT(MEMBER_ID) = 1 THEN 0 ELSE 1 END AS MEMBER_ID
+      FROM MEMBERS WHERE MEMBER_ID = #{str}
+   </select>
 
-	
+   
 
-	
+   
 
 </mapper>

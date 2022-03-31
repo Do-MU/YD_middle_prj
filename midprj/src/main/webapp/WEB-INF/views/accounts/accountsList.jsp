@@ -8,93 +8,91 @@
 
 <style>
 #container {
-	padding: 200px 0;
+	padding-bottom: 200px;
 }
-
+#page_header{
+	margin-bottom: 100px;
+}
+.col-md-12> h2{
+	font-weight: lighter;
+}
 table {
 	margin-top: 50px;
 	width: 60%;
 	font-size: 1.3em;
 }
-
 span:hover {
 	cursor: pointer;
 	color: red;
 }
-
 th {
 	text-align: center;
 	border-style: none none solid none;
 }
-
 .accounts:hover{
 	cursor: pointer;
 	background-color: #ffff99;
 }
-
 #insert_btn{
 	width: 100px;
 	height: 50px;
 	margin-top: 50px;
 	font-size: 1.2em;
 }
-
-#fun{
-	display:none;
+  
+.acnt{
+	width:70%;
+	height: 200px;
+	margin-bottom: 30px;
+	border-radius: 10px;
+	background-color: blue;
+}
+.acnt:hover{
+	cursor:pointer;
+}
+.acnt:nth-child(2n){
+	background-color: skyblue;
+}
+.acnt >h2{
+	color: white;
+	padding: 50px 0 0 30px;
+	text-align: left;
+}
+.acnt >h3{
+	color: white;
+	padding: 50px 30px 0 0;
+	text-align: right;
 }
 </style>
 
 <div align="center" id="container">
-	<div>
-		<h1>등 록 계 좌</h1>
-	</div>
-	<div>
-		<form id="frm" method="post">
-			<div>
-				<table id="contents">
-					<thead>
-						<tr>
-							<th id="fun">은행대표코드</th>
-							<th>은행대표코드</th>
-							<th>은행명</th>
-							<th>계좌번호(보안)</th>
-							<th>예금주</th>
-							<th>계좌상태</th>
-						</tr>
-					</thead>
-
-					<tbody id="noticeBody">
-						<c:if test="${empty list }">
-							<tr>
-								<td colspan="7">실패</td>
-							</tr>
-						</c:if>
-						<c:if test="${not empty list }">
-							<c:forEach items="${list }" var="l">
-								<tr onclick="accountContents('${l.fintech_use_num}','${l.account_holder_name}')" class="accounts">
-									<td align="center" id="fun">${l.fintech_use_num }</td>
-									<td align="center">${l.bank_code_std }</td>
-									<td align="center">${l.bank_name }</td>
-									<td align="center">${l.account_num_masked }</td>
-									<td align="center">${l.account_holder_name }</td>
-									<td align="center">${l.account_state }</td>
-								</tr>
-							</c:forEach>
-						</c:if>
-					</tbody>
-				</table>
+	<section id="page_header" class="single-page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>등 록 계 좌</h2>
+					<nav aria-label="breadcrumb mx-auto" role="navigation">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="home.do">오픈뱅킹</a></li>
+							<li class="breadcrumb-item active" aria-current="page">계좌목록</li>
+						</ol>
+					</nav>
+				</div>
 			</div>
-			<input type="hidden" id="finNum" name="finNum">
-			<input type="hidden" id="holderName" name="holderName">
-		</form>
-	</div>
+		</div>
+	</section>
 
+	<div>
+		<c:if test="${not empty list }">
+			<c:forEach items="${list }" var="l">
+				<div id="account_${l.fintech_use_num}" class="acnt" onclick="location.href='accountsView.do?fin_num=${l.fintech_use_num}'">
+					<h2>${l.bank_name }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${l.account_num_masked }</h2>
+					<h3>${l.account_holder_name }</h3>
+				</div>
+			</c:forEach>
+		</c:if>
+	</div>
 </div>
 <script>
-function accountContents(n, m){
-	frm.finNum.value = n;
-	frm.holderName.value = m;
-	frm.action = "oneAccount.do";
-	frm.submit();
-}
+	
 </script>
