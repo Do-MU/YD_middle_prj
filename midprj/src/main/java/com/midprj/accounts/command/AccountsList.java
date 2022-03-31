@@ -15,6 +15,7 @@ import com.midprj.accounts.serviceImpl.AccountsServiceImpl;
 import com.midprj.comm.Command;
 import com.midprj.comm.OpenBank;
 import com.midprj.oneaccount.service.OneAccountJson;
+import com.midprj.transaction.service.TransactionListJson;
 
 public class AccountsList implements Command {
 
@@ -27,22 +28,23 @@ public class AccountsList implements Command {
 		String access_token = (String) session.getAttribute("access_token");
 		String user_seq_no = (String) session.getAttribute("user_seq_no");
 		
-		String result = OpenBank.getAccountList(user_seq_no, access_token);
+		String accList = OpenBank.getAccountList(user_seq_no, access_token);
 //		System.out.println(result);
 		
 		
 		Gson gson = new Gson();
-		AccountsListJson alj = gson.fromJson(result, AccountsListJson.class);
+		AccountsListJson alj = gson.fromJson(accList, AccountsListJson.class);
 //		System.out.println(alj.getRes_list());
 		
 		// 프로그램이 실행될때마다 테스트베드에서 목록을 가져와서 새로 추가된 계좌목록이 있는지 확인
 		for(AccountsVO ac : alj.getRes_list()) {
 //			System.out.println(ac);
+			
 			// 핀테크이용번호(계좌당 하나)와 엑세스토큰을 통해 해당 계좌의 잔액을 조회
 			// >> oaj에 저장
-			String result2 = OpenBank.checkBalance(ac.getFintech_use_num(), access_token);
-			System.out.println("result2: "+result2);
-			OneAccountJson oaj = gson.fromJson(result2, OneAccountJson.class);
+			String balanceInfo = OpenBank.checkBalance(ac.getFintech_use_num(), access_token);
+			System.out.println("balanceInfo: " + balanceInfo);
+			OneAccountJson oaj = gson.fromJson(balanceInfo, OneAccountJson.class);
 			oaj.setBalance_amt(changeNumFormat(oaj.getBalance_amt()));
 			
 			// 불러온 계좌list 중 DB에 저장되지 않은 계좌list가 있다면 등록

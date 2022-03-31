@@ -194,7 +194,7 @@ a {
                         <ion-icon name="home-outline" class="nav__icon"></ion-icon>
                         <span class="nav_name">Home</span>
                     </a>
-                    <a href="accountList.do" class="nav__link">
+                    <a href="openBanking.do" class="nav__link">
                         <ion-icon name="albums-outline" class="nav__icon"></ion-icon>
                         <span class="nav_name">Accounts</span>
                     </a>

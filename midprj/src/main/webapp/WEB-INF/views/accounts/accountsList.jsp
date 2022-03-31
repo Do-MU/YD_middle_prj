@@ -36,7 +36,7 @@
 }
 .acnt >h3{
 	color: white;
-	padding: 50px 30px 0 0;
+	padding: 10px 30px 0 0;
 	text-align: right;
 }
 </style>
@@ -46,10 +46,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>등 록 계 좌</h2>
+					<h2>오 픈 뱅 킹</h2>
 					<nav aria-label="breadcrumb mx-auto" role="navigation">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="home.do">오픈뱅킹</a></li>
+							<li class="breadcrumb-item"><a href="openBanking.do">오픈뱅킹</a></li>
 							<li class="breadcrumb-item active" aria-current="page">계좌목록</li>
 						</ol>
 					</nav>
@@ -62,7 +62,7 @@
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="l">
 				<div id="account_${l.fintech_use_num}" class="acnt" onclick="location.href='accountsView.do?fin_num=${l.fintech_use_num}'">
-					<h2>${l.bank_name }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${l.account_num_masked } (${l.product_name})</h2>
+					<h2>${l.bank_name }&nbsp; [${l.product_name}]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>${l.account_num_masked }</h2>
 					<h3>예금주 : ${l.account_holder_name }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${l.balance_amt}원</h3>
 				</div>
 			</c:forEach>
