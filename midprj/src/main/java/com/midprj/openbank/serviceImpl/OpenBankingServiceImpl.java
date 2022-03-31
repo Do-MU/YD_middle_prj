@@ -14,8 +14,7 @@ public class OpenBankingServiceImpl implements OpenBankingService {
 
 	@Override
 	public OpenBankingVO selectMember(OpenBankingVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		return map.selectMember(vo);
 	}
 
 	@Override
