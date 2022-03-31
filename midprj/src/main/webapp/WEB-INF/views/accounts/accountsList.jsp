@@ -16,30 +16,6 @@
 .col-md-12> h2{
 	font-weight: lighter;
 }
-table {
-	margin-top: 50px;
-	width: 60%;
-	font-size: 1.3em;
-}
-span:hover {
-	cursor: pointer;
-	color: red;
-}
-th {
-	text-align: center;
-	border-style: none none solid none;
-}
-.accounts:hover{
-	cursor: pointer;
-	background-color: #ffff99;
-}
-#insert_btn{
-	width: 100px;
-	height: 50px;
-	margin-top: 50px;
-	font-size: 1.2em;
-}
-  
 .acnt{
 	width:70%;
 	height: 200px;
@@ -86,8 +62,8 @@ th {
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="l">
 				<div id="account_${l.fintech_use_num}" class="acnt" onclick="location.href='accountsView.do?fin_num=${l.fintech_use_num}'">
-					<h2>${l.bank_name }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${l.account_num_masked }</h2>
-					<h3>${l.account_holder_name }</h3>
+					<h2>${l.bank_name }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${l.account_num_masked } (${l.product_name})</h2>
+					<h3>예금주 : ${l.account_holder_name }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${l.balance_amt}원</h3>
 				</div>
 			</c:forEach>
 		</c:if>

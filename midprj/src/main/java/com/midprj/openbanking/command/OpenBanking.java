@@ -26,17 +26,18 @@ public class OpenBanking implements Command {
 		String loginId = (String) session.getAttribute("loginId"); 
 		mVO.setMemberId(loginId);
 		mVO = mDAO.selectMember(mVO);
-		
-		if(mVO.getUserSeqNo() != null) {
-			System.out.println("조회 이력이 있음");
-			request.setAttribute("message", "조회한 이력이 있음");
-			oVO.setMember_id(loginId);
-			System.out.println(oVO.getMember_id());
-			oVO = oDAO.selectMember(oVO);
-			
-			session.setAttribute("access_token", oVO.getAccess_token());
-			session.setAttribute("user_seq_no", oVO.getUser_seq_no());
+		if(loginId!=null) {
+			if(mVO.getUserSeqNo() != null) {
+				System.out.println("조회 이력이 있음");
+				oVO.setMember_id(loginId);
+//				System.out.println(oVO.getMember_id());
+				oVO = oDAO.selectMember(oVO);
+				
+				session.setAttribute("access_token", oVO.getAccess_token());
+				session.setAttribute("user_seq_no", oVO.getUser_seq_no());
+			}
 		}
+		
 		
 		return "openBanking/openHome";
 	}
