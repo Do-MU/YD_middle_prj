@@ -176,6 +176,59 @@ public class OpenBank {
 		
 		
 	}
+	
+	public static String transactionList(String fintech_use_num, String access_token) {
+		List<Parameter> postParams = new ArrayList<Parameter>();
+		
+		Random random = new Random();
+		int createNum = 0;
+		String ranNum = "";
+		int letter = 9;
+		String resultNum = "";
+		
+		for(int i=0; i<letter; i++) {
+			createNum = random.nextInt(9);
+			ranNum = Integer.toString(createNum);
+			resultNum += ranNum;
+		}
+		
+		String bank_tran_id = "M202200519U"+resultNum;
+		
+		postParams.add(new Parameter("bank_tran_id",bank_tran_id));
+		postParams.add(new Parameter("fintech_use_num",fintech_use_num));
+		postParams.add(new Parameter("inquiry_type","A"));
+		postParams.add(new Parameter("inquiry_base","D"));
+		postParams.add(new Parameter("from_date","20200101"));
+		postParams.add(new Parameter("to_date","20220331"));
+		postParams.add(new Parameter("sort_order","D"));
+		postParams.add(new Parameter("tran_dtime","20201001150133"));
+		
+		StringBuilder sb = new StringBuilder();
+		try {
+			String uri = getQuery(postParams);
+			String strUrl =  "https://testapi.openbanking.or.kr/v2.0/account/transaction_list/fin_num"+"?"+uri;
+			URL url = new URL(strUrl);
+			
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			//Header에 정보 추가
+			con.setRequestProperty("Authorization", "Bearer "+access_token);
+			
+			if(con.getResponseCode() == HttpURLConnection.HTTP_OK){
+				BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
+				String line;
+				while((line=br.readLine())!=null){
+					sb.append(line).append("\n");
+				}
+				br.close();
+			}else {
+				System.out.println(con.getResponseMessage());
+			}
+		}catch(Exception e) {
+			
+		}
+		
+		return sb.toString();
+	}
 
 		
 }

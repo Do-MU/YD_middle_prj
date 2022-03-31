@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.midprj.transaction.service.TransactionMapper">
+	<resultMap
+		type="com.midprj.transaction.service.TransactionVO"
+		id="transactionMap">
+		<result property="tran_date" column="tran_date"></result>
+		<result property="inout_type" column="inout_type"></result>
+		<result property="tran_type" column="tran_type"></result>
+		<result property="print_content" column="print_content"></result>
+		<result property="tran_amt" column="tran_amt"></result>
+		<result property="after_balance_amt" column="after_balance_amt"></result>
+		<result property="branch_name" column="branch_name"></result>
+	</resultMap>
+
+	<insert id="insertTransactions"
+		parameterType="com.midprj.transaction.service.TransactionVO">
+		INSERT INTO TRANSACTIONS
+		VALUES
+		(#{tran_date},#{inout_type},#{tran_type},#{print_content},#{tran_amt},#{after_balance_amt},#{branch_name})
+	</insert>
+	
+	<select id="selectTransactions" parameterType="com.midprj.transaction.service.TransactionVO" resultMap="transactionMap">
+		select *
+		from transactions
+	</select>
+</mapper>

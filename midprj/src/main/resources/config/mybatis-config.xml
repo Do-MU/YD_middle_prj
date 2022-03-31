@@ -27,6 +27,7 @@
     <mapper resource="com/midprj/openbank/service/openbanking-map.xml"/>
     <mapper resource="com/midprj/accounts/service/accounts-map.xml"/>
     <mapper resource="com/midprj/oneaccount/service/oneAccount-map.xml"/>
+    <mapper resource="com/midprj/transaction/service/transaction-map.xml"/>
      
   </mappers>
 </configuration>

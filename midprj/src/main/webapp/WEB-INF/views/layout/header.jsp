@@ -98,7 +98,9 @@
 			nMin = "0" + nMin;
 
 		return "" + nHour + ":" + nMin + ":" + nSec;
-	}	
+	}
+	
+
 </script>
 </head>
 <body>
