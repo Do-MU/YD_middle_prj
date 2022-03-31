@@ -19,6 +19,7 @@ import com.midprj.comment.command.CommentDelete;
 import com.midprj.comment.command.CommentInsert;
 import com.midprj.comment.command.CommentSearch;
 import com.midprj.comment.command.CommentUpdate;
+import com.midprj.exchangerate.ExchangeRate;
 import com.midprj.home.command.HomeCommand;
 import com.midprj.member.command.AjaxMemberIdCheck;
 import com.midprj.member.command.AjaxMemberPwUpdate;
@@ -109,6 +110,8 @@ public class FrontController extends HttpServlet {
 		map.put("/accountInquiry.do", new AccountInquiry());					// 계좌
     
 		map.put("/mapAtm.do", new MapAtm()); 									// 주변 은행 페이지
+		map.put("/exchangeRate.do", new ExchangeRate()); 									// 주변 은행 페이지
+		
 		
 		map.put("/openBanking.do", new OpenBanking());
 		map.put("/bankOauth.do", new BankOauthCommand());
