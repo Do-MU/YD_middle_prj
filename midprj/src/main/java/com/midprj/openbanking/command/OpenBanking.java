@@ -31,6 +31,7 @@ public class OpenBanking implements Command {
 			System.out.println("조회 이력이 있음");
 			request.setAttribute("message", "조회한 이력이 있음");
 			oVO.setMember_id(loginId);
+			System.out.println(oVO.getMember_id());
 			oVO = oDAO.selectMember(oVO);
 			
 			session.setAttribute("access_token", oVO.getAccess_token());
