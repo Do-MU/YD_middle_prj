@@ -15,16 +15,22 @@ public class AccountsServiceImpl implements AccountsService {
 
 	@Override
 	public List<AccountsVO> selectAccounts(AccountsVO vo) {
-		// TODO Auto-generated method stub
+
 		return map.selectAccounts(vo);
 	}
 
 	@Override
 	public AccountsVO selectOneAccount(String fintech_use_num) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return map.selectOneAccount(fintech_use_num);
 	}
 
+	@Override
+	public int selectAccountInfo(AccountsVO vo) {
+		
+		return map.selectAccountInfo(vo);
+	}
+	
 	@Override
 	public int insertAccounts(AccountsVO vo) {
 		// TODO Auto-generated method stub
@@ -33,9 +39,9 @@ public class AccountsServiceImpl implements AccountsService {
 	}
 
 	@Override
-	public int selectAccountInfo(AccountsVO vo) {
-		// TODO Auto-generated method stub
-		return map.selectAccountInfo(vo);
+	public int updateAccounts(AccountsVO vo) {
+		
+		return map.updateAccounts(vo);
 	}
 
 }
