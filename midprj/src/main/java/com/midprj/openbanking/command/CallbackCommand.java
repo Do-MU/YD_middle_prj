@@ -9,9 +9,9 @@ import com.midprj.comm.OpenBank;
 import com.midprj.member.service.MemberService;
 import com.midprj.member.service.MemberVO;
 import com.midprj.member.serviceImpl.MemberServiceImpl;
-import com.midprj.openbank.service.OpenBankingService;
-import com.midprj.openbank.service.OpenBankingVO;
-import com.midprj.openbank.serviceImpl.OpenBankingServiceImpl;
+import com.midprj.openbanking.service.OpenBankingService;
+import com.midprj.openbanking.service.OpenBankingVO;
+import com.midprj.openbanking.serviceImpl.OpenBankingServiceImpl;
 
 import net.sf.json.JSONObject;
 

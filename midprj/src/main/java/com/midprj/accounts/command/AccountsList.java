@@ -16,7 +16,7 @@ import com.midprj.comm.Command;
 import com.midprj.comm.OpenBank;
 import com.midprj.oneaccount.service.OneAccountJson;
 
-public class accountsList implements Command {
+public class AccountsList implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {

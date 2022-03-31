@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.midprj.account.command.AccountInquiry;
-import com.midprj.account.command.AccountList;
 import com.midprj.accounts.command.AccountsView;
-import com.midprj.accounts.command.accountsList;
+import com.midprj.accounts.command.AccountsList;
 import com.midprj.comm.Command;
 import com.midprj.comment.command.CommentDelete;
 import com.midprj.comment.command.CommentInsert;
@@ -106,19 +104,15 @@ public class FrontController extends HttpServlet {
 		map.put("/qnaInsert.do", new QnaInsert());								// 고객센터 작성 처리
 		map.put("/qnaAnswerUpdate.do", new QnaAnswerUpdate());					// 고객센터 답변 등록
 		
-		map.put("/accountList.do", new AccountList());							// 계좌리스트 조회
-		map.put("/accountInquiry.do", new AccountInquiry());					// 계좌
-    
+		map.put("/openBanking.do", new OpenBanking());							// 오픈뱅킹 페이지
+		map.put("/bankOauth.do", new BankOauthCommand());						// 사용자인증
+		map.put("/callback.do", new CallbackCommand());							// 인증 후 콜백 > 토큰 / 사용자 일련번호 저장
+		map.put("/accountsList.do", new AccountsList());						// 등록계좌조회 (사용자 일련번호)
+		map.put("/oneAccount.do", new OneAccount());							// 계좌잔액조회 (핀테크 이용번호)
+		map.put("/accountsView.do", new AccountsView());						// 거래내역조회 (핀테크 이용번호)
+		
 		map.put("/mapAtm.do", new MapAtm()); 									// 주변 은행 페이지
-		map.put("/exchangeRate.do", new ExchangeRate()); 									// 주변 은행 페이지
-		
-		
-		map.put("/openBanking.do", new OpenBanking());
-		map.put("/bankOauth.do", new BankOauthCommand());
-		map.put("/callback.do", new CallbackCommand());
-		map.put("/accountsList.do", new accountsList());
-		map.put("/oneAccount.do", new OneAccount());
-		map.put("/accountsView.do", new AccountsView());
+		map.put("/exchangeRate.do", new ExchangeRate()); 						// 환율 페이지
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)

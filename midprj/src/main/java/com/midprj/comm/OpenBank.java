@@ -13,14 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
-
-
-
-
-
 public class OpenBank {
-	
 	public static String getAccessToken(String code) { //accesstoken 받는 function
 		final String strUrl = "https://testapi.openbanking.or.kr/oauth/2.0/token"; // Host
 		final String grant_type = "authorization_code";

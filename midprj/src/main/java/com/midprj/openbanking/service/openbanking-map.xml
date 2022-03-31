@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.midprj.openbank.service.OpenBankingMapper">
-	<resultMap type="com.midprj.openbank.service.OpenBankingVO" id="openBankingMap">
+<mapper namespace="com.midprj.openbanking.service.OpenBankingMapper">
+	<resultMap type="com.midprj.openbanking.service.OpenBankingVO" id="openBankingMap">
 		<id property="code" column="code"></id>
 		<result property="access_token" column="access_token"></result>
 		<result property="refresh_token" column="refresh_token"></result>
@@ -9,14 +9,14 @@
 		<result property="member_id" column="member_id"></result>
 	</resultMap>
 	
-	<select id="selectMember" parameterType="com.midprj.openbank.service.OpenBankingVO" resultMap="openBankingMap">
+	<select id="selectMember" parameterType="com.midprj.openbanking.service.OpenBankingVO" resultMap="openBankingMap">
 		SELECT *
 		FROM OPENBANKING
 		WHERE MEMBER_ID = #{member_id}
 	</select>
 
 	<insert id="insertMember"
-		parameterType="com.midprj.openbank.service.OpenBankingVO">
+		parameterType="com.midprj.openbanking.service.OpenBankingVO">
 		INSERT INTO OPENBANKING
 		VALUES(#{code},#{access_token},#{refresh_token},#{user_seq_no},#{member_id})
 	</insert>
