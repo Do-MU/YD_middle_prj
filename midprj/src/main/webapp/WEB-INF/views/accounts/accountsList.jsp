@@ -89,7 +89,6 @@ th {
 			</c:forEach>
 		</c:if>
 	</div>
-
 </div>
 <script>
 </script>
