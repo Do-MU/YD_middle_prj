@@ -47,7 +47,7 @@
       </trim>
       where MEMBER_Id= #{memberId}
    </update>
-   
+
    <delete id="deleteMember"
       parameterType="com.midprj.member.service.MemberVO">
       DELETE FROM MEMBERS WHERE MEMBER_ID = #{memberId}
