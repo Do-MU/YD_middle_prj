@@ -29,7 +29,9 @@ public class ExchangeRate implements Command {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
 			String key = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=qfm2LElyI0r7em2lKMskzeiW76fiBlD6&"; // 인증키
+			
 			String searchdate = now.format(formatter);
+			
 			String data = "AP01"; // 검색요청API타입
 
 			List<ExchangeRateVO> list = new ArrayList<ExchangeRateVO>();
@@ -38,7 +40,9 @@ public class ExchangeRate implements Command {
 			URL url = new URL(
 					"https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=qfm2LElyI0r7em2lKMskzeiW76fiBlD6&searchdate="
 							+ searchdate +"&data="+data);
-//		"https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=qfm2LElyI0r7em2lKMskzeiW76fiBlD6&searchdate=20220328&data=AP01");
+//			URL url = new URL(
+//					"https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=qfm2LElyI0r7em2lKMskzeiW76fiBlD6&searchdate="
+//							+ 20220331 +"&data="+data);
 			BufferedReader bf;
 			bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
 
@@ -71,17 +75,15 @@ public class ExchangeRate implements Command {
 					nation = sNation[0];
 					currency = sNation[1];
 				}
-
+				if(eDealBasR.contains(",")==true) {
+					eDealBasR = eDealBasR.replace(",", "");
+				}
 				vo.setNation(nation);
 				vo.setCurrency(currency);
 				vo.setExchangeRate(eDealBasR);
 
 				list.add(vo);
-//				for (ExchangeRateVO string : list) {
-//					System.out.println(string.getNation()); 
-//					System.out.println(string.getCurrency()); 
-//					System.out.println(string.getExchangeRate()); 
-//				}
+
 			}
 
 			request.setAttribute("eList", list);
