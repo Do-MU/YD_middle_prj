@@ -132,10 +132,11 @@ input {
 					if (resultSplit[0] == '1') {
 						alert("이메일 조회 완료.");
 						$("#checkId").attr("disabled", "disabled");
-
+						$("#checkId").val('Yes');
 						mEmail = resultSplit[1];
 						mName = resultSplit[2];
 						mId = resultSplit[3];
+
 					} else {
 						alert("등록되지 않은 이메일");
 						$("#femail").val('');
@@ -156,9 +157,17 @@ input {
 			if (mnumber == fnumber.value) {
 				alert("인증완료");
 				frm.submit();
+			}else{
+				alert("인증번호가 맞지않습니다.");
 			}
 		}
 		function isIdSame() {
+			if($("#checkId").val() == "No"){
+				alert("이메일 체크를 해주세요.")
+				$("#fid").val('');
+				$("#fid").focus();
+				$("#femail").focus();
+			}else{
 			if (mId == $("#fid").val()) {
 				$("#idSame").text("아이디 일치")
 				$("#idSame").css("color", "blue");
@@ -166,10 +175,15 @@ input {
 			} else {
 				$("#idSame").text("아이디 불일치")
 				$("#idSame").css("color", "red");
-
+			}
 			}
 		}
 		function isNameSame() {
+			if($("#checkId").val() == "No"){
+				alert("이메일 체크를 해주세요.")
+				$("#fname").val('');
+				$("#femail").focus();
+			}
 			if (mName == $("#fname").val()) {
 				$("#nameSame").text("이름 일치")
 				$("#nameSame").css("color", "blue");

@@ -40,9 +40,7 @@ public class ExchangeRate implements Command {
 			URL url = new URL(
 					"https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=qfm2LElyI0r7em2lKMskzeiW76fiBlD6&searchdate="
 							+ searchdate +"&data="+data);
-//			URL url = new URL(
-//					"https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=qfm2LElyI0r7em2lKMskzeiW76fiBlD6&searchdate="
-//							+ 20220331 +"&data="+data);
+
 			BufferedReader bf;
 			bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
 
