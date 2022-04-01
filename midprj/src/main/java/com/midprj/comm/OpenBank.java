@@ -134,7 +134,7 @@ public class OpenBank {
 			resultNum += ranNum;
 		}
 		
-		String bank_tran_id = "M202200519U"+resultNum;
+		String bank_tran_id = "M202200531U"+resultNum;
 		System.out.println(bank_tran_id);
 		
 		postParams.add(new Parameter("bank_tran_id",bank_tran_id));
@@ -185,7 +185,7 @@ public class OpenBank {
 			resultNum += ranNum;
 		}
 		
-		String bank_tran_id = "M202200519U"+resultNum;
+		String bank_tran_id = "M202200531U"+resultNum;
 		
 		postParams.add(new Parameter("bank_tran_id",bank_tran_id));
 		postParams.add(new Parameter("fintech_use_num",fintech_use_num));
