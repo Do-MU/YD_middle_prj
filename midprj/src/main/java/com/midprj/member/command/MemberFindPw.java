@@ -44,6 +44,7 @@ public class MemberFindPw implements Command {
 		vo.setMemberEmail(recipient);
 		vo.setMemberName(request.getParameter("mName"));
 		vo.setMemberId(request.getParameter("mId"));
+		
 		String result;
 		vo = memberDao.selectMemberId(vo);
 		if (vo == null) {
