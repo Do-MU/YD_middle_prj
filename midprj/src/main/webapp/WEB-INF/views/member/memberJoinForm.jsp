@@ -10,7 +10,7 @@
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 #Join{
-	padding: 200px 0;
+	padding-bottom: 100px;
 }
 #Join> h1{
 	margin-bottom: 50px;
@@ -25,22 +25,39 @@ th {
 }
 
 td {
-	padding-bottom: 10px;
+	padding-bottom: 20px;
 	width: 430px;
 }
 input{
 	height: 40px;
-	width: 250px;
+	width: 300px;
 }
 button{
 	height: 40px;
 }
+#page_header{
+	margin-bottom: 100px;
+}
 </style>
 </head>
 <body>
+	<section id="page_header" class="single-page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>회 원 가 입</h2>
+					<nav aria-label="breadcrumb mx-auto" role="navigation">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="home.do">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">회원가입</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
 	<form id="frm" name="frm" action="memberJoin.do" method="post">
 		<div id="Join" align="center">
-			<h1>회 원 가 입</h1>
 			<div id="id_pass">
 				<table>
 					<tr>

@@ -2,13 +2,20 @@
 	pageEncoding="UTF-8"%>
 
 <style>
-form {
-	padding: 200px;
+#container {
+	padding: 300px 0;
 }
 
 #btn {
 	margin-top: 30px;
 	text-align: center;
+}
+
+#btn> button{
+	
+	width: 100px;
+	height: 50px;
+	text-size: 1.5em;
 }
 
 h1 {
@@ -23,39 +30,51 @@ td {
 }
 
 input {
-	height: 30px;
+	height: 40px;
+	width: 300px;
 }
 </style>
-
-<form id="frm" action="memberLoginForm.do" method="post">
-	<div>
-
-		<h1>아이디 찾기</h1>
+<section id="page_header" class="single-page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>ID 찾기</h2>
+				<nav aria-label="breadcrumb mx-auto" role="navigation">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="home.do">Home</a></li>
+						<li class="breadcrumb-item active" aria-current="page">ID찾기</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
 	</div>
-	<table align="center">
+</section>
+<div id="container">
+	<form id="frm" action="memberLoginForm.do" method="post">
+		<table align="center">
+			<tr>
+				<td>이메일</td>
+				<td><input type="email" id="femail" name="femail"
+					required="required">
+					<button type="button" id="checkId" value="No" onclick="isIdCheck()" style="height: 40px;">이메일 조회하기</button>
+				</td>
 
-		<tr>
-			<td>이메일</td>
-			<td><input type="email" id="femail" name="femail"
-				required="required">
-				<button type="button" id="checkId" value="No" onclick="isIdCheck()">체크</button>
-			</td>
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td><input type="text" id="fname" name="fname"
+					required="required" onchange="isNameSame()">&nbsp;&nbsp;<span
+					id="nameSame"></span></td>
+			</tr>
+		</table>
+		<div id="btn">
+			<button type="button" onclick="selectMemberId()">아이디찾기</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button" onclick="history.back()">취소</button>
 
-		</tr>
-		<tr>
-			<td>이름</td>
-			<td><input type="text" id="fname" name="fname"
-				required="required" onchange="isNameSame()">&nbsp;&nbsp;<span
-				id="nameSame"></span></td>
-		</tr>
-	</table>
-	<div id="btn">
-		<button type="button" onclick="selectMemberId()">아이디찾기</button>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<button type="button" onclick="history.back()">취소</button>
-
-	</div>
-</form>
+		</div>
+	</form>
+</div>
 <script type="text/javascript">
 	var mName;
 	var mEmail;
@@ -96,35 +115,35 @@ input {
 	function isIdCheck() {
 
 		var str = $("#femail").val();
-		if(str.search("@") != -1){
-		$.ajax({
-			url : "ajaxMemberIdCheck.do",
-			type : "post",
-			data : {"str" : str},
-			dataType : "text",
-			success : function(result) {
-				resultSplit = result.split("|")
+		if (str.search("@") != -1) {
+			$.ajax({
+				url : "ajaxMemberIdCheck.do",
+				type : "post",
+				data : {
+					"str" : str
+				},
+				dataType : "text",
+				success : function(result) {
+					resultSplit = result.split("|")
 
-				if (resultSplit[0] == '1') {
-					alert("이메일 조회 완료.");
-					$("#checkId").attr("disabled", "disabled");
-					
-					
-					mEmail = resultSplit[1];
-					mName = resultSplit[2];
+					if (resultSplit[0] == '1') {
+						alert("이메일 조회 완료.");
+						$("#checkId").attr("disabled", "disabled");
 
-				} else {
-					alert("등록되지 않은 이메일");
-					$("#femail").val('');
-					$("#femail").focus();
+						mEmail = resultSplit[1];
+						mName = resultSplit[2];
+
+					} else {
+						alert("등록되지 않은 이메일");
+						$("#femail").val('');
+						$("#femail").focus();
+					}
+					;
+
 				}
-				;
+			});
 
-			}
-		});
-	
-		}
-		else{
+		} else {
 			alert("이메일 형식으로 입력해주세요.");
 			$("#femail").focus();
 		}
@@ -134,7 +153,7 @@ input {
 			$("#nameSame").text("이름 일치")
 			$("#nameSame").css("color", "blue");
 			$("#checkId").val('Yes');
-		} else {    
+		} else {
 			$("#nameSame").text("이름 불일치")
 			$("#nameSame").css("color", "red");
 			$("#checkId").val('No');

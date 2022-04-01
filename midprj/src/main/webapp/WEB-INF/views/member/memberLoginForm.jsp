@@ -3,7 +3,6 @@
 <style>
 
 #login {
-	margin: 10px 0 10px 0;
 	padding: 300px 0;
 	text-align: center;
 }
@@ -62,6 +61,8 @@ a {
 a:hover {
 	color: red;
 }
+#page_header{
+}
 </style>
 
 <script type="text/javascript">
@@ -85,10 +86,23 @@ a:hover {
 		frm.submit();
 	}
 </script>
-
+	<section id="page_header" class="single-page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>로 그 인</h2>
+					<nav aria-label="breadcrumb mx-auto" role="navigation">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="home.do">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">로그인</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
 <form id="frm" name="frm" action="memberLogin.do" method="post">
 	<div id="login">
-		<h1>로 그 인</h1>
 		<div id="id_pass">
 			<div>
 				<input type="text" id="id" name="id" placeholder="아이디를 입력하세요.">
