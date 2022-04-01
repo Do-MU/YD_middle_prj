@@ -29,8 +29,8 @@
 
    <insert id="insertMember"
       parameterType="com.midprj.member.service.MemberVO">
-      INSERT INTO MEMBERS
-      VALUES(#{memberId},#{memberPw},#{memberName},#{memberEmail},#{memberTel},#{memberBirth},#{memberAddress},0)
+      INSERT INTO MEMBERS(member_Id,member_pw,member_name,member_email,member_tel,member_birth,member_address)
+      VALUES(#{memberId},#{memberPw},#{memberName},#{memberEmail},#{memberTel},#{memberBirth},#{memberAddress})
    </insert>
    
    <update id="updateMember"
