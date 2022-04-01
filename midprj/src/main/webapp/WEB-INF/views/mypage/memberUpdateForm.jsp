@@ -73,8 +73,7 @@ td.informs {
 			</tr>
 			<tr>
 				<th>비밀번호</th>
-				<td><input type="password" id="password" name="password"
-					value="${memberPw }"></td>
+				<td><input type="button" id="password" name="password" value="비밀번호 변경하기" onclick="location.href='memberUpdatePwForm.do'"></td>
 			</tr>
 			<tr>
 				<th>휴대폰 번호</th>
