@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.midprj.qna.service.QnaVO;
-
 public interface NoticeMapper {
 	List<NoticeVO> noticeSelectList();
 	

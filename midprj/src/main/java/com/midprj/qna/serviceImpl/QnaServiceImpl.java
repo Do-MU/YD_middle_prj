@@ -38,9 +38,9 @@ public class QnaServiceImpl implements QnaService {
 		// TODO Auto-generated method stub
 		return map.getList(pageNum, amount,memberId);
 	}
-	@Override
-	public Integer getTotal() {
-		return map.getTotal();
+	@Override 
+	public Integer getTotal(String memberId) {
+		return map.getTotal(memberId);
 	}
 	
 	

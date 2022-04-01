@@ -34,7 +34,7 @@ public class QnaList implements Command {
 		}
 		
 		List<QnaVO> list = qDAO.getList(pageNum, amount, memberId);
-		int total = qDAO.getTotal();
+		int total = qDAO.getTotal(memberId);
 		System.out.println(total);
 		PageVO pageVO = new PageVO(pageNum , amount, total);
 		
