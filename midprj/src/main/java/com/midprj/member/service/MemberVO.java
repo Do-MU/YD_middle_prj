@@ -16,5 +16,5 @@ public class MemberVO {
 	private String memberBirth;
 	private String memberAddress;
 	private String userSeqNo;
-	
+	//ㅠ
 }
