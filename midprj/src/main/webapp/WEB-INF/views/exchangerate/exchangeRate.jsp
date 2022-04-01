@@ -38,8 +38,8 @@ input {
 	border-left: none;
 	border-right: none;
 	border-bottom: none;
+	outline:none;
 }
-
 table.eTable {
 	border-collapse: separate;
 	border-spacing: 1px;
@@ -56,7 +56,9 @@ table.eTable th {
 	color: #fff;
 	background: #ce4869;
 }
-
+#icon{
+	font-size: 1.7em;
+}
 table.eTable td {
 	width: 155px;
 	padding: 10px;
@@ -64,10 +66,28 @@ table.eTable td {
 	border-bottom: 1px solid #ccc;
 	background: #eee;
 }
-</style>
-
-</head>
 <body>
+#page_header{
+	margin-bottom: 100px;
+}
+</style>
+<script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+</head>
+	<section id="page_header" class="single-page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>환 율 계 산 기</h2>
+					<nav aria-label="breadcrumb mx-auto" role="navigation">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="home.do">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">환율 계산기</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
 	<div align="center">
 		<span> <select id="nationOne" onchange="f1()">
 				<option value="" selected disabled>언어 선택</option>
@@ -81,6 +101,7 @@ table.eTable td {
 			onchange="money1Select()"> <input type="text" id="pre1"
 			readonly></input>
 		</span> 
+		<span><ion-icon name="swap-horizontal-outline" id="icon"/></span>
 		<span> <select id="nationTwo" onchange="f2()">
 				<c:forEach var="item" items="${eList}">
 					<option value="${item.exchangeRate}" id="${item.currency }">${item.nation }</option>
