@@ -16,30 +16,27 @@
 .col-md-12>h2 {
 	font-weight: lighter;
 }
-
-#acc_info {
-	width: 70%;
+#acc_info{
+	width: 60%;
 	height: 200px;
 	background-color: lightgray;
 	padding: auto;
 }
-
-#acc_info>h2 {
-	padding-top: 30px;
+#acc_info> h1{
+	padding: 40px 40px;
+	text-align:left;
 }
-
-#acc_info>h3 {
-	padding: 50px 30px;
-	text-align: right;
+#acc_info> h2{
+	padding: 0 50px;
+	text-align:right;
 }
 
 #acc_trans {
 	font-size: 1.5em;
 	margin-top: 50px;
 }
-
-td {
-	padding: 10px;
+td{
+	padding: 20px 45px;
 	border-style: solid none;
 	border-color: lightgray;
 }
@@ -63,8 +60,8 @@ td {
 	</section>
 	<div>
 		<div id="acc_info">
-			<h2>${ac.bank_name }&nbsp;${ac.account_num_masked }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[${ac.product_name }]</h2>
-			<h3>${ac.balance_amt }원</h3>
+			<h1>${ac.bank_name }&nbsp;${ac.account_num_masked }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[${ac.product_name }]</h1>
+			<h2>${ac.balance_amt }원</h2>
 		</div>
 	</div>
 	<div>

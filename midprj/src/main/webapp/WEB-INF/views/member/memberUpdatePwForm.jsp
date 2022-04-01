@@ -45,7 +45,6 @@ input {
 	<div>
 		<h1>비밀번호 변경</h1>
 	</div>
-	<h1>${fid }</h1>
 	<table align="center">
 
 		<tr>
