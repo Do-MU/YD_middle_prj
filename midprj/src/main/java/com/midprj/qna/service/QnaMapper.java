@@ -10,7 +10,7 @@ public interface QnaMapper {
 	QnaVO qnaSelect(QnaVO vo);
 	int qnaInsert(QnaVO vo);
 	int qnaUpdate(QnaVO vo);
-	Integer getTotal();
+	Integer getTotal(String memberId); 
 	
 	List<QnaVO> getList(@Param("pageNum")int pageNum,@Param("amount") int amount,@Param("memberId") String memberId);
 }

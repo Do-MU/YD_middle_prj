@@ -54,6 +54,11 @@
 .log_btns:hover {
 	color: yellow;
 }
+.Transparency{
+	border : none;
+	background-color : rgba(0,0,0,0);
+	cursor: pointer;
+}
 </style>
 <script>
 	var tid;
@@ -132,7 +137,7 @@
 								<div id="demo" style="color: white;"></div>
 								<div id = "counter" style="color: white;"></div>
 							</div>
-							<div><input type="button" value = "연장" onclick = "counter_reset()" ></div>
+							<div><input type="button" value = "연장" class = "Transparency" style = " color : white;"onclick = "counter_reset()" ></div>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<div>
 								<a class='log_btns' href='memberLoginForm.do'>로그아웃</a>
